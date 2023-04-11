@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface StopwatchRepository extends JpaRepository<StopwatchEntity, UUID> {
+public interface StopwatchRepository extends JpaRepository<StopwatchEntity, Integer> {
 }

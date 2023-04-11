@@ -2,5 +2,5 @@ package com.example.tidtagarur;
 
 import java.util.UUID;
 
-public record StopwatchDTO(UUID id,
+public record StopwatchDTO(Integer id,
                            double time) {}

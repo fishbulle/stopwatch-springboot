@@ -1,15 +1,12 @@
 package com.example.tidtagarur;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
+import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name = "saved_times")
@@ -20,10 +17,18 @@ import java.util.UUID;
 public class StopwatchEntity {
 
     @Id
-    private UUID id;
+    @SequenceGenerator(
+            name = "time_seq",
+            sequenceName = "time_seq",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "time_seq"
+    )
+    @Column(name = "time_id")
+    private Integer id;
 
-    @Column(name = "time")
+    @Column(name = "savedTime")
     private double time;
-
-    public StopwatchEntity(UUID id) { this.id = id; }
 }
