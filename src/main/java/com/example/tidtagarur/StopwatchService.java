@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -21,11 +22,15 @@ public class StopwatchService {
         return stopwatchEntity;
     }
 
-    public void saveTime(StopwatchDTO stopwatchDTO) {
+    public void saveTime(StopwatchDTO stopwatchDTO, UUID id) throws NotFoundException {
+        Optional<StopwatchEntity> stopwatchEntity = stopwatchRepository.findById(id);
 
-
-        stopwatchEntity.setTime(stopwatchDTO.time());
-        stopwatchRepository.save(stopwatchEntity);
+        if (stopwatchEntity.isPresent()) {
+            stopwatchEntity.get().setTime(stopwatchDTO.time());
+            stopwatchRepository.save(stopwatchEntity.get());
+        } else {
+            throw new NotFoundException("Can't find stopwatch.");
+        }
     }
 
     public List<StopwatchEntity> getSavedTimes() {

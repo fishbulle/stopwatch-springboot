@@ -21,8 +21,9 @@ public class StopwatchController {
     }
 
     @PostMapping("/save")
-    public void saveTime(@RequestBody StopwatchDTO stopwatchDTO) {
-        stopwatchService.saveTime(stopwatchDTO);
+    public void saveTime(@RequestHeader(value = "id") UUID id,
+                         @RequestBody StopwatchDTO stopwatchDTO) throws NotFoundException {
+        stopwatchService.saveTime(stopwatchDTO, id);
     }
 
     @GetMapping("/savedTimes")
