@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin
@@ -14,20 +15,30 @@ public class StopwatchController {
 
     private final StopwatchService stopwatchService;
 
-    @PostMapping("/create")
-    public UUID createStopwatch() {
-        return stopwatchService.createStopwatch()
-                .getId();
+    @PostMapping("/saveTime")
+    public StopwatchDTO saveTime(@RequestBody StopwatchDTO stopwatchDTO) {
+        return stopwatchService.saveTime(stopwatchDTO)
+                .map(StopwatchController::timeDTO)
+                .orElse(null);
     }
 
-    @PostMapping("/save")
-    public void saveTime(@RequestHeader(value = "id") UUID id,
-                         @RequestBody StopwatchDTO stopwatchDTO) throws NotFoundException {
-        stopwatchService.saveTime(stopwatchDTO, id);
+    @GetMapping("/listTimes")
+    public List<StopwatchDTO> getSavedTimes() {
+        return stopwatchService.getSavedTimes()
+                .stream()
+                .map(StopwatchController::timeDTO)
+                .collect(Collectors.toList());
     }
 
-    @GetMapping("/savedTimes")
-    public List<StopwatchEntity> getSavedTimes() {
-        return new ArrayList<>(stopwatchService.getSavedTimes());
+    @PostMapping("/delete")
+    public Boolean deleteTime(@RequestBody StopwatchDTO stopwatchDTO) {
+        return stopwatchService.deleteTime(stopwatchDTO.id());
+    }
+
+    private static StopwatchDTO timeDTO(StopwatchEntity stopwatchEntity) {
+        return new StopwatchDTO(
+                stopwatchEntity.getId(),
+                stopwatchEntity.getTime()
+        );
     }
 }
