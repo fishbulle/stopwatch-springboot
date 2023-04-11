@@ -24,4 +24,6 @@ public class StopwatchEntity {
 
     @Column(name = "time")
     private double time;
+
+    public StopwatchEntity(UUID id) { this.id = id; }
 }

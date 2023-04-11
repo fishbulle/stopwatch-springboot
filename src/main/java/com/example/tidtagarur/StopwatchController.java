@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin
@@ -12,6 +13,12 @@ import java.util.List;
 public class StopwatchController {
 
     private final StopwatchService stopwatchService;
+
+    @PostMapping("/create")
+    public UUID createStopwatch() {
+        return stopwatchService.createStopwatch()
+                .getId();
+    }
 
     @PostMapping("/save")
     public void saveTime(@RequestBody StopwatchDTO stopwatchDTO) {
