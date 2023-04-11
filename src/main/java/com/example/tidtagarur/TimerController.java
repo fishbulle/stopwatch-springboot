@@ -14,10 +14,8 @@ public class TimerController {
     private final TimerService timerService;
 
     @PostMapping("/save")
-    public TimerDTO saveTime(@RequestBody TimerDTO timerDTO) {
-        return timerService.saveTime(timerDTO)
-                .map(this::timerEntityToDTO)
-                .orElse(null);
+    public void saveTime(@RequestBody TimerDTO timerDTO) {
+        timerService.saveTime(timerDTO);
     }
 
     private TimerDTO timerEntityToDTO(TimerEntity timerEntity) {

@@ -11,9 +11,9 @@ public class TimerService {
 
     private final TimerRepository timerRepository;
 
-    public TimerEntity saveTime(TimerDTO timerDTO) {
-        TimerEntity timerEntity = new TimerEntity(
-                UUID.randomUUID()
-        );
+    public void saveTime(TimerDTO timerDTO) {
+        TimerEntity timerEntity = new TimerEntity();
+        timerEntity.setTime(timerDTO.time());
+        timerRepository.save(timerEntity);
     }
 }
