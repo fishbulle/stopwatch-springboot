@@ -1,3 +1,6 @@
 package com.example.tidtagarur;
 
-public record TimerDTO(double time) {}
+import java.util.UUID;
+
+public record TimerDTO(UUID id,
+                       double time) {}

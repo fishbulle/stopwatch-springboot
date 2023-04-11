@@ -1,7 +1,30 @@
 package com.example.tidtagarur;
 
-import org.springframework.stereotype.Controller;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@CrossOrigin
+@AllArgsConstructor
 public class TimerController {
+
+    private final TimerService timerService;
+
+    @PostMapping("/save")
+    public TimerDTO saveTime(@RequestBody TimerDTO timerDTO) {
+        return timerService.saveTime(timerDTO)
+                .map(this::timerEntityToDTO)
+                .orElse(null);
+    }
+
+    private TimerDTO timerEntityToDTO(TimerEntity timerEntity) {
+
+        return new TimerDTO(
+                timerEntity.getId(),
+                timerEntity.getTime()
+        );
+    }
 }
