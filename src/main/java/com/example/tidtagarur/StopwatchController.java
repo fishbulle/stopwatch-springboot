@@ -1,10 +1,10 @@
 package com.example.tidtagarur;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -18,13 +18,8 @@ public class StopwatchController {
         stopwatchService.saveTime(stopwatchDTO);
     }
 
-    // GetMapping för att lista sparade tider
-
-    private StopwatchDTO stopwatchEntityToDTO(StopwatchEntity stopwatchEntity) {
-
-        return new StopwatchDTO(
-                stopwatchEntity.getId(),
-                stopwatchEntity.getTime()
-        );
+    @GetMapping("/savedTimes")
+    public List<StopwatchEntity> getSavedTimes() {
+        return new ArrayList<>(stopwatchService.getSavedTimes());
     }
 }
