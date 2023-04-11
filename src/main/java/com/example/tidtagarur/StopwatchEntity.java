@@ -8,7 +8,7 @@ import lombok.Setter;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
-@Entity
+@Entity(name = "Stopwatch")
 @Table(name = "saved_times")
 @Getter
 @Setter
