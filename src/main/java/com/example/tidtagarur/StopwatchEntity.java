@@ -17,7 +17,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TimerEntity {
+public class StopwatchEntity {
 
     @Id
     private UUID id;
