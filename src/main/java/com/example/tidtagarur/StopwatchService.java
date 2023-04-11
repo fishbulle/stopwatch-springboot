@@ -25,13 +25,12 @@ public class StopwatchService {
         return stopwatchRepository.findAll();
     }
 
-    public Boolean deleteTime(Integer id) {
+    public Boolean deleteTime(Integer id) throws NotFoundException {
         if (stopwatchRepository.existsById(id)) {
             stopwatchRepository.deleteById(id);
             return true;
+        } else {
+            throw new NotFoundException("Stopwatch not found");
         }
-
-        return false;
     }
-
 }

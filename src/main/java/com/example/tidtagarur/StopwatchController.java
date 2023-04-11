@@ -29,7 +29,7 @@ public class StopwatchController {
     }
 
     @PostMapping("/delete")
-    public Boolean deleteTime(@RequestBody StopwatchDTO stopwatchDTO) {
+    public Boolean deleteTime(@RequestBody StopwatchDTO stopwatchDTO) throws NotFoundException {
         return stopwatchService.deleteTime(stopwatchDTO.id());
     }
 
