@@ -24,5 +24,4 @@ public class TimerEntity {
 
     @Column(name = "time")
     private double time;
-
 }
