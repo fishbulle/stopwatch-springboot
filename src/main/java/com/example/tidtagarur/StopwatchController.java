@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/api")
 public class StopwatchController {
 
     private final StopwatchService stopwatchService;
@@ -30,9 +31,9 @@ public class StopwatchController {
     }
 
     @CrossOrigin
-    @DeleteMapping("/delete")
-    public void deleteTime(@RequestBody StopwatchDTO stopwatchDTO) throws NotFoundException {
-        stopwatchService.deleteTime(stopwatchDTO.id());
+    @DeleteMapping("/delete/{id}")
+    public void deleteTime(@PathVariable("id") Integer id) throws NotFoundException {
+        stopwatchService.deleteTime(id);
     }
 
     private static StopwatchDTO timeDTO(StopwatchEntity stopwatchEntity) {
