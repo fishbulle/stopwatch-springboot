@@ -1,6 +1,7 @@
 package com.example.tidtagarur;
 
-import java.util.UUID;
+import java.util.Date;
 
 public record StopwatchDTO(Integer id,
-                           double time) {}
+                           double time,
+                           Date date) {}

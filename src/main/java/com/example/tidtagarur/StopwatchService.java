@@ -3,6 +3,7 @@ package com.example.tidtagarur;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +16,8 @@ public class StopwatchService {
     public Optional<StopwatchEntity> saveTime(StopwatchDTO stopwatchDTO) {
         StopwatchEntity stopwatchEntity = new StopwatchEntity(
                 null,
-                stopwatchDTO.time()
+                stopwatchDTO.time(),
+                new Date()
         );
         stopwatchRepository.save(stopwatchEntity);
         return Optional.of(stopwatchEntity);

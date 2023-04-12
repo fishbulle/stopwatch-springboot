@@ -6,23 +6,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/timer")
 public class StopwatchController {
 
     private final StopwatchService stopwatchService;
 
-    @CrossOrigin
-    @PostMapping("/saveTime")
+    @PostMapping
     public StopwatchDTO saveTime(@RequestBody StopwatchDTO stopwatchDTO) {
         return stopwatchService.saveTime(stopwatchDTO)
                 .map(StopwatchController::timeDTO)
                 .orElse(null);
     }
 
-    @CrossOrigin
-    @GetMapping("/listTimes")
+    @GetMapping
     public List<StopwatchDTO> getSavedTimes() {
         return stopwatchService.getSavedTimes()
                 .stream()
@@ -31,7 +30,7 @@ public class StopwatchController {
     }
 
     @CrossOrigin
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteTime(@PathVariable("id") Integer id) throws NotFoundException {
         stopwatchService.deleteTime(id);
     }
@@ -39,7 +38,8 @@ public class StopwatchController {
     private static StopwatchDTO timeDTO(StopwatchEntity stopwatchEntity) {
         return new StopwatchDTO(
                 stopwatchEntity.getId(),
-                stopwatchEntity.getTime()
+                stopwatchEntity.getTime(),
+                stopwatchEntity.getDate()
         );
     }
 }
