@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin
 @AllArgsConstructor
 public class StopwatchController {
 
     private final StopwatchService stopwatchService;
 
+    @CrossOrigin
     @PostMapping("/saveTime")
     public StopwatchDTO saveTime(@RequestBody StopwatchDTO stopwatchDTO) {
         return stopwatchService.saveTime(stopwatchDTO)
@@ -20,6 +20,7 @@ public class StopwatchController {
                 .orElse(null);
     }
 
+    @CrossOrigin
     @GetMapping("/listTimes")
     public List<StopwatchDTO> getSavedTimes() {
         return stopwatchService.getSavedTimes()
@@ -28,9 +29,10 @@ public class StopwatchController {
                 .collect(Collectors.toList());
     }
 
+    @CrossOrigin
     @DeleteMapping("/delete")
-    public Boolean deleteTime(@RequestBody StopwatchDTO stopwatchDTO) throws NotFoundException {
-        return stopwatchService.deleteTime(stopwatchDTO.id());
+    public void deleteTime(@RequestBody StopwatchDTO stopwatchDTO) throws NotFoundException {
+        stopwatchService.deleteTime(stopwatchDTO.id());
     }
 
     private static StopwatchDTO timeDTO(StopwatchEntity stopwatchEntity) {
