@@ -1,7 +1,7 @@
 package com.example.tidtagarur;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public record StopwatchDTO(Integer id,
                            double time,
-                           Date date) {}
+                           LocalDate date) {}

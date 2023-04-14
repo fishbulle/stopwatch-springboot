@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
@@ -35,5 +35,5 @@ public class StopwatchEntity {
     private double time;
 
     @Column(name = "date")
-    private Date date;
+    private LocalDate date;
 }

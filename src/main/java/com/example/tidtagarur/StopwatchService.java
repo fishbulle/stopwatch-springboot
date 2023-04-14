@@ -3,7 +3,7 @@ package com.example.tidtagarur;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +17,7 @@ public class StopwatchService {
         StopwatchEntity stopwatchEntity = new StopwatchEntity(
                 null,
                 stopwatchDTO.time(),
-                new Date()
+                LocalDate.now()
         );
         stopwatchRepository.save(stopwatchEntity);
         return Optional.of(stopwatchEntity);
